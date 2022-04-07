@@ -10,6 +10,14 @@ import cv2
 
 image = cv2.imread('imag.jpg')
 
+
+names = []
+filesname = 'files/thing.names'
+
+with open(filesname,'rt') as f:
+    filesname = f.read().rstrip('\n').split('\n')
+    print(filesname)
+
 cv2.imshow("yassine windows",image)
 
 cv2.waitKey(0)
