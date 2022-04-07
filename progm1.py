@@ -29,9 +29,14 @@ with open(filesname,'rt') as f:
     net.setInputScale(1.0/127.5)
     net.setInputSwapRB(True)
     
-    Ids ,conf , b = net.detect(image, confThreshold=0.5)
-print(Ids,b)
-    
+    Ids ,conf , b = net.detect(image, confThreshold=0.2)
+#print(Ids,b)
+
+for classId , confidence , box in zip(Ids.flatten(),conf.flatten(),b):
+    cv2.rectangle(image,box,color=(131,84,202),thickness=3)
+    cv2.putText(image,filesname[classId-1],
+                (box[0]+10,box[1]+20),
+                cv2.FONT_HERSHEY_COMPLEX,1,(252,52,52),thickness=2)    
     
 
 cv2.imshow("yassine windows",image)
