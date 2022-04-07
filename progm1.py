@@ -18,9 +18,9 @@ with open(filesname,'rt') as f:
     filesname = f.read().rstrip('\n').split('\n')
     #print(filesname)
     
-    x = "files/frozen_inference_graph.pb"
+    x = "files/frozen_inference_graph.pb" #poids 
     
-    y = "files/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
+    y = "files/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt" #configuration path
     
     net = cv2.dnn_DetectionModel(x , y)
     
@@ -29,6 +29,8 @@ with open(filesname,'rt') as f:
     net.setInputScale(1.0/127.5)
     net.setInputSwapRB(True)
     
+    Ids ,conf , b = net.detect(image, confThreshold=0.5)
+print(Ids,b)
     
     
 
